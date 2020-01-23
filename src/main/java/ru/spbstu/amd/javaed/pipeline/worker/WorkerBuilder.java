@@ -1,4 +1,4 @@
-package ru.spbstu.amd.java.pipeline.worker;
+package ru.spbstu.amd.javaed.pipeline.worker;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

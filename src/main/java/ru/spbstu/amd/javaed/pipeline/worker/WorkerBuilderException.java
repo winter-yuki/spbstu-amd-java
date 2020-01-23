@@ -1,18 +1,18 @@
-package ru.spbstu.amd.java.pipeline.worker;
+package ru.spbstu.amd.javaed.pipeline.worker;
 
 import org.jetbrains.annotations.NotNull;
 
-public class WorkerException extends RuntimeException {
+public class WorkerBuilderException extends RuntimeException {
 
     @NotNull
-    final String workerName;
+    private final String workerName;
 
-    public WorkerException(@NotNull String workerName, @NotNull String message) {
+    public WorkerBuilderException(@NotNull String workerName, @NotNull String message) {
         super(message);
         this.workerName = workerName;
     }
 
-    public WorkerException(
+    public WorkerBuilderException(
             @NotNull String workerName,
             @NotNull String message,
             @NotNull Throwable cause) {
@@ -21,7 +21,7 @@ public class WorkerException extends RuntimeException {
     }
 
     @NotNull
-    public String workerName() {
+    public final String workerName() {
         return workerName;
     }
 }
