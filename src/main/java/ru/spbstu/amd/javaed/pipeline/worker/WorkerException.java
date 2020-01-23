@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public class WorkerException extends RuntimeException {
 
     @NotNull
-    final String workerName;
+    private final String workerName;
 
     public WorkerException(@NotNull String workerName, @NotNull String message) {
         super(message);
@@ -21,7 +21,7 @@ public class WorkerException extends RuntimeException {
     }
 
     @NotNull
-    public String workerName() {
+    public final String workerName() {
         return workerName;
     }
 }

@@ -2,7 +2,7 @@ package ru.spbstu.amd.javaed.pipeline.worker;
 
 import org.jetbrains.annotations.NotNull;
 
-public class WorkerCreationException extends WorkerBuilderException {
+public class WorkerCreationException extends WorkerException {
 
     public WorkerCreationException(@NotNull String workerName, @NotNull String message) {
         super(workerName, message);
