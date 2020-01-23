@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  * .build()
  * </code>
  */
-public class WorkerBuilder {
+public final class WorkerBuilder {
 
     @NotNull
     public static final String WORKER_FACTORY_METHOD_NAME = "of";
