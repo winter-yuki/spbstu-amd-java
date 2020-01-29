@@ -2,17 +2,19 @@ package ru.spbstu.amd.javaed.pipeline.worker;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Set;
+
 /**
  * Represents worker in execution chain.
  * <p>
  * Implementation should have factory method
  * <code>
- * public static Worker of(String confPath)
+ * public static Worker of(String confPath) { ... }
  * </code>
  * where confPath - path to worker's configuration file.
  * Throws {@link WorkerCreationException}.
  */
-public interface Worker extends Consumer {
+public interface Worker {
 
     /**
      * Create Worker instance.
@@ -31,11 +33,16 @@ public interface Worker extends Consumer {
      * Process data and provide result to next worker.
      *
      * @param data     Data to process (sequence of type D).
-     * @param producer Data provider (call-side).
-     * @param <D>      Input data type (some sequence),
-     *                 should be in the set of possible input types.
+     * @param producer Data provider (call-side), just reference to recognize it.
      * @return Number of processed elements in input sequence.
-     * @throws DataProcessingException If data procession fails.
+     * @throws WorkException  If data procession fails.
+     * @throws IllegalArgumentException If provided data type is not expected
+     *                                  (type should be from the set of possible input types).
      */
-    <D> long work(@NotNull D data, @NotNull Worker producer);
+    long work(@NotNull Object data, @NotNull Object producer);
+
+    /**
+     * @return Set of types, {@link Worker} can process.
+     */
+    @NotNull Set<Class<?>> possibleInputTypes();
 }
