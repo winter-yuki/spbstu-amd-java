@@ -21,14 +21,19 @@
 - копипаст строки с ошибкой
 - тип ошибки (CE, RE, LE - compile, runtime, logic соответственно)
 
-В подготовке могут помочь [шпоры](). (Но их не достаточно, практикуйтесь в программировании сами!)
+В подготовке могут помочь [шпоры](https://github.com/winter-yuki/spbstu-amd-java/blob/master/TRICKY.md). 
+(Но их не достаточно, практикуйтесь в программировании сами!)
 
 
 ## Лабораторный
 
 В курсе 4 лабораторные работы. Они вместе складываются в один проект - многопоточный архиватор.
 
-Описания: [первой](), [второй](), [третьей](), [четвертой]().
+Описания: 
+[первой](https://github.com/winter-yuki/spbstu-amd-java/blob/master/LAB1.md), 
+[второй](https://github.com/winter-yuki/spbstu-amd-java/blob/master/LAB2.md), 
+[третьей](https://github.com/winter-yuki/spbstu-amd-java/blob/master/LAB3.md), 
+[четвертой](https://github.com/winter-yuki/spbstu-amd-java/blob/master/LAB4.md).
 
 
 ### Общие требования
