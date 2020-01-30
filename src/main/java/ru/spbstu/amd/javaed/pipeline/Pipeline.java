@@ -5,7 +5,7 @@ package ru.spbstu.amd.javaed.pipeline;
  * via {@link ru.spbstu.amd.javaed.pipeline.Producer.DataAccessor}
  * and passes it through workers.
  * <p>
- * Gets {@link Producer} and first {@link ru.spbstu.amd.javaed.pipeline.worker.Worker} in constructor.
+ * Needs {@link Producer} and first {@link ru.spbstu.amd.javaed.pipeline.worker.Worker} to work.
  */
 public interface Pipeline extends Runnable {
 }
