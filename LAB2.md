@@ -20,6 +20,9 @@
 [StandalonePipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/StandalonePipeline.java). 
 Получится конвейер, на который можно выставлять разные алгоритмы кодирования (одетые в рабочих).
 
+Все интерфейсы можно расширять как вам угодно (хотя можно обойтись и без этого). Но 
+[MutableWorker](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/MutableWorker.java)
+Нужно имплементировать как есть.
 
 ### Workers
 
