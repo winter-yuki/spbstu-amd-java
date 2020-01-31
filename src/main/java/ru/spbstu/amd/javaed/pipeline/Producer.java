@@ -11,7 +11,7 @@ public interface Producer {
      * @param acceptableOutputDataTypes Types, that produces will produce.
      * @return Data accessor for data with chosen type.
      */
-    @NotNull DataAccessor getAccessor(@NotNull Set<Class<?>> acceptableOutputDataTypes);
+    @NotNull DataAccessor getDataAccessor(@NotNull Set<Class<?>> acceptableOutputDataTypes);
 
     /**
      * Represents data accessor, such a pipe, consumer can get data from.
