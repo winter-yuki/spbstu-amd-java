@@ -5,12 +5,12 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-final class CreationUtils {
+final class CreationUtil {
 
     @NotNull
     static final String WORKER_FACTORY_METHOD_NAME = "of";
 
-    private CreationUtils() {
+    private CreationUtil() {
     }
 
     /**

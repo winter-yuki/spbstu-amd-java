@@ -23,7 +23,7 @@ public interface MutableWorker extends Worker {
      * @throws WorkerCreationException If creation via factory fails.
      */
     static MutableWorker of(@NotNull String workerClassName, @NotNull String confFilePath) {
-        return CreationUtils.createWorker(workerClassName, confFilePath);
+        return CreationUtil.createWorker(workerClassName, confFilePath);
     }
 
     /**

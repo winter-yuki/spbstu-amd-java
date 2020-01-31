@@ -26,7 +26,7 @@ public interface Worker {
      */
     @NotNull
     static Worker of(@NotNull String workerClassName, @NotNull String confFilePath) {
-        return CreationUtils.createWorker(workerClassName, confFilePath);
+        return CreationUtil.createWorker(workerClassName, confFilePath);
     }
 
     /**
