@@ -8,6 +8,7 @@
 - Отличный, весьма полный [курс](https://compscicenter.ru/courses/java/nsk/2017-autumn/classes/3384/) лекций.
 - Прохладный [курс](https://stepik.org/course/187/syllabus?auth=registration), но задачки порешать можно.
 - Адаптивный [курс](https://stepik.org/course/2403/?auth=registration) с задачами.
+- Философию можно почитать [тут]().
 
 
 ## Тесты
