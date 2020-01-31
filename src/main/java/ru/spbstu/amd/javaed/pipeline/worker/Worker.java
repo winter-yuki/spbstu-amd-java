@@ -17,11 +17,11 @@ import java.util.Set;
 public interface Worker {
 
     /**
-     * Create Worker instance.
+     * Create {@link Worker} instance.
      *
      * @param workerClassName Name of class to create.
      * @param confFilePath    Path to worker's config file.
-     * @return Worker instance.
+     * @return {@link Worker} instance.
      * @throws WorkerCreationException If creation via factory fails.
      */
     @NotNull
@@ -35,7 +35,7 @@ public interface Worker {
      * @param data     Data to process (sequence of type D).
      * @param producer Data provider (call-side), just reference to recognize it.
      * @return Number of processed elements in input sequence.
-     * @throws WorkException  If data procession fails.
+     * @throws WorkException            If data procession fails.
      * @throws IllegalArgumentException If provided data type is not expected
      *                                  (type should be from the set of possible input types).
      */
