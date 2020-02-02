@@ -4,18 +4,19 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents mutable worker.
- * <p>
- * Implementation should have factory method
- * <code>
- * public static MutableWorker of(String confPath) { ... }
- * </code>
- * where confPath - path to worker's configuration file.
- * Throws {@link WorkerCreationException}.
  */
 public interface MutableWorker extends Worker {
 
     /**
      * Create {@link MutableWorker} instance.
+     * <p>
+     * Implementation should have factory method
+     * <code>
+     * /**
+     * * @param confFilePath - path to worker's configuration file.
+     * * @throws {@link WorkerCreationException}
+     * public static MutableWorker of(String confFilePath) { ... }
+     * </code>
      *
      * @param workerClassName Name of class to create.
      * @param confFilePath    Path to worker's config file.

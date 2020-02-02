@@ -4,11 +4,15 @@ import ru.spbstu.amd.javaed.pipeline.worker.Worker;
 
 /**
  * Represents pipeline that builds sequence of {@link Worker}s end runs it.
- * <ul>
- *     <li>Adds special {@link Worker}
- *     at the beginning of execution sequence, that will read input file in loop.</li>
- *     <li>And another one at the end, that will write processed data to output file.</li>
- * </ul>
+ *
+ * Adds special worker at the end ({@link Writer}) that will write processed data to the output file.
  */
 public interface StandalonePipeline extends Runnable {
+
+    /**
+     * Read data in loop by portions and provide it
+     * to the first {@link Worker} in the execution sequence.
+     */
+    @Override
+    void run();
 }

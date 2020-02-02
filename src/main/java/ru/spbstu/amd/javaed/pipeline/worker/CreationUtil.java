@@ -14,10 +14,16 @@ final class CreationUtil {
     }
 
     /**
-     * Create Worker wia reflection.
+     * Create {@link Worker} via reflection.
+     *
+     * <code>
+     * public static W of(String confPath);
+     * </code>
+     * Where W - some {@link Worker} subclass.
      *
      * @param workerClassName Name of class to create.
      * @param confFilePath    Path to worker's config file.
+     * @param <T>             Some {@link Worker} subclass.
      * @return Worker instance.
      * @throws WorkerCreationException If creation via factory fails.
      */

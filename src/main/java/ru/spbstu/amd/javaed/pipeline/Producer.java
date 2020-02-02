@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Represents entity that provides data via {@link DataAccessor}.
+ */
 public interface Producer {
 
     /**
@@ -24,7 +27,7 @@ public interface Producer {
         @NotNull Optional<Object> get();
 
         /**
-         * @return Is input stream ended.
+         * @return Has input stream ended.
          */
         boolean isEnd();
     }

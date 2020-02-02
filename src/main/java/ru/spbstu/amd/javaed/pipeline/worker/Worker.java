@@ -5,19 +5,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 /**
- * Represents worker in execution chain.
- * <p>
- * Implementation should have factory method
- * <code>
- * public static Worker of(String confPath) { ... }
- * </code>
- * where confPath - path to worker's configuration file.
- * Throws {@link WorkerCreationException}.
+ * Represents immutable worker in execution chain.
  */
 public interface Worker {
 
     /**
      * Create {@link Worker} instance.
+     * <p>
+     * Implementation should have factory method
+     * <code>
+     * /**
+     * * @param confFilePath - path to worker's configuration file.
+     * * @throws {@link WorkerCreationException}
+     * public static Worker of(String confFilePath) { ... }
+     * </code>
      *
      * @param workerClassName Name of class to create.
      * @param confFilePath    Path to worker's config file.
@@ -30,7 +31,7 @@ public interface Worker {
     }
 
     /**
-     * Process data and provide result to next worker.
+     * Process data and provide result to the next worker.
      *
      * @param data     Data to process (sequence of type D).
      * @param producer Data provider (call-side), just reference to recognize it.
