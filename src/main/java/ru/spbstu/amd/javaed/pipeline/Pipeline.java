@@ -8,4 +8,10 @@ package ru.spbstu.amd.javaed.pipeline;
  * Needs {@link Producer} and first {@link ru.spbstu.amd.javaed.pipeline.worker.Worker} to work.
  */
 public interface Pipeline extends Runnable {
+
+    /**
+     * Get data from {@link Producer} in loop, process it and pass to the first worker in execution chain.
+     */
+    @Override
+    void run();
 }
