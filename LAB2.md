@@ -5,7 +5,7 @@
 Вам предлагается каркас из набора интерфейсов, последовательно имплементировав которые, вы получите готовую лабу (ну или почти).
 
 Чтобы поспльзоваться ими, скачайте `jar` последней версии 
-[тут](https://drive.google.com/open?id=1Ji-11XI_uVZOnhBJuBKU20117a6cDZ_n) 
+[тут](https://drive.google.com/open?id=1nHOb1A9QFvt11BKg4bfI7ZFgErokAsG4) 
 и [подключите](https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project) 
 его к проекту в идее.
 
