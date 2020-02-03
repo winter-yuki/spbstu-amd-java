@@ -21,7 +21,7 @@ public class WorkerException extends RuntimeException {
     }
 
     @NotNull
-    public final String workerName() {
+    public final String getWorkerName() {
         return workerName;
     }
 }

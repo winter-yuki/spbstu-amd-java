@@ -45,5 +45,5 @@ public interface Worker {
     /**
      * @return Set of types, {@link Worker} can process.
      */
-    @NotNull Set<Class<?>> possibleInputTypes();
+    @NotNull Set<Class<?>> getPossibleInputTypes();
 }
