@@ -35,7 +35,9 @@ Reader <- DataAccessor <- Pipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> Wr
 
 Допустим, в конструктор `Pipeline` передается `Reader`. Теперь нужно из него достать `DataAccessor`, через который можно будет запрашивать следующие порции данных.
 ```
-this.dataAccessor = reader.getDataAccessor(this.possibleInputTypes());
+final Set<Class<?>> possibleTypes = reader.getPossibleOutputTypes();
+final Class<?> chosenType = // choose type from possibleTypes
+this.dataAccessor = reader.getDataAccessor(chosenType);
 ```
 
 Такая косвенность поможет нам в 4й лабораторной, когда у одного `Reader` будут просить данные сразу несколько `Pipeline`ов.
