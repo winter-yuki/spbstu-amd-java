@@ -1,5 +1,8 @@
 package ru.spbstu.amd.javaed.pipeline;
 
+import ru.spbstu.amd.javaed.pipeline.io.Reader;
+import ru.spbstu.amd.javaed.pipeline.io.Writer;
+
 /**
  * Builds {@link Pipeline} (or many) and provides {@link Reader} and {@link Writer} to it.
  */

@@ -1,4 +1,4 @@
-package ru.spbstu.amd.javaed.pipeline;
+package ru.spbstu.amd.javaed.pipeline.io;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -11,10 +11,9 @@ import java.util.Set;
 public interface Producer {
 
     /**
-     * @param acceptableOutputDataTypes Types, that produces will produce.
-     * @return Data accessor for data with chosen type.
+     * @return Types that {@link Producer} can produce.
      */
-    @NotNull DataAccessor getDataAccessor(@NotNull Set<Class<?>> acceptableOutputDataTypes);
+    @NotNull Set<Class<?>> getPossibleOutputTypes();
 
     /**
      * Represents data accessor, such a pipe, consumer can get data from.

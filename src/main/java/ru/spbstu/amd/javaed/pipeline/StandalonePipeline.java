@@ -1,5 +1,6 @@
 package ru.spbstu.amd.javaed.pipeline;
 
+import ru.spbstu.amd.javaed.pipeline.io.Writer;
 import ru.spbstu.amd.javaed.pipeline.worker.Worker;
 
 /**
