@@ -13,10 +13,10 @@
 
 1. Выстраиваются рабочие последовательно путем присоединения друг к другу.
 2. В конец последовательности рабочих добавляется 
-[Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Writer.java).
+[Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Writer.java).
 3. Создается экземпляр 
   [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java),
-  который при создании знакомится с [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Reader.java),
+  который при создании знакомится с [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Reader.java),
   через который он будет получать данные из файла. К тому же он получает ссылку на первого рабочего цепочки, чтобы оттдавать данные дальше.
 4. Запускается ```pipeline.run()```
 

@@ -120,7 +120,8 @@ MyMutableWorker mmw = ru.spbstu.amd.javaed.pipeline.worker.MutableWorker.of(
 
 Можно было бы создавать рабочих и через конструктор, но код, в котором объекты создаются не напрямую, а через фабрики, поправу считается значительно более гибким.
 
-Заметим, что у последнего рабочего все еще нет следующего, это приведет к ошибке. В конец конвейера добавим еще рабочего, который будет писать данные в файл. Пусть этот рабочий расширяет интерфейс [Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Writer.java).
+Заметим, что у последнего рабочего все еще нет следующего, это приведет к ошибке. В конец конвейера добавим еще рабочего, который будет писать данные в файл. Пусть этот рабочий имплементирует интерфейс  
+[Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Writer.java).
 
 ```
 StandalonePipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> MyWorkerThatWritesToFile
