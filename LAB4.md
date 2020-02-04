@@ -13,3 +13,9 @@
 Итоговая архитектура:
 [![spbspu-amd-java-lab3.png](https://i.postimg.cc/YSt7S4ff/spbspu-amd-java-lab3.png)](https://postimg.cc/ZWs275QC)
 
+#### Thread vs exception!
+
+1. Из `run()`, который запустил `thread.start()` (т.е. из `run()` в `Pipeline`) не должно вылетать исключений...
+2. Если все-таки планируется что они будут вылетать, можно повесить 
+[exception handler](https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.UncaughtExceptionHandler.html),
+и в нем обрабатывать на границе потока. Это сделать обязательно, так как дефолтное поведение - убийство процесса.
