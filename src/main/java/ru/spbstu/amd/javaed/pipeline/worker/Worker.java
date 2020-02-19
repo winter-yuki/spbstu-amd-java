@@ -17,6 +17,7 @@ public interface Worker {
      * /**
      * * @param confFilePath - path to worker's configuration file.
      * * @throws {@link WorkerCreationException}
+     * * /
      * public static Worker of(String confFilePath) { ... }
      * </code>
      *
@@ -39,6 +40,7 @@ public interface Worker {
      * @throws WorkException            If data procession fails.
      * @throws IllegalArgumentException If provided data type is not expected
      *                                  (type should be from the set of possible input types).
+     * @throws IllegalStateException    If next worker was not set.
      */
     long work(@NotNull Object data, @NotNull Object producer);
 
