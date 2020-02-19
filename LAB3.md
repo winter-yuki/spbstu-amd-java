@@ -2,10 +2,10 @@
 
 Один конвейер - один поток исполнения. Теперь мы хотим научиться запускать параллельно несколько потоков, чтобы архивировать файл быстрее на нескольких ядрах процессора. Будем к этому готовиться.
 
-Для этого введем еще одну абстракцию, 
+Ранее у нас был автономный (standalone) конвейер `StandalonePipeline`. Теперь мы хотим в перспективе много конвейеров. Для этого введем еще одну абстракцию, 
 [PipelineManager](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/PipelineManager.java),
 который будет собирать конвейеры [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java) 
-(они не сами собираются) и запускать их в разных потоках.
+(они не сами собираются) и запускать их в разных потоках. В этой  лабораторной пока `Pipeline` только один.
 
 ### Сборка конвейера
 
