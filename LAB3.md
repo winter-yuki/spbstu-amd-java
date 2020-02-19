@@ -15,10 +15,11 @@
 2. В конец последовательности рабочих добавляется 
 [Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Writer.java).
 3. Создается экземпляр 
-  [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java),
-  который при создании знакомится с [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Reader.java),
-  через который он будет получать данные из файла. К тому же он получает ссылку на первого рабочего цепочки, чтобы оттдавать данные дальше.
-4. Запускается ```pipeline.run()```
+  [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java):
+    - который при создании знакомится с 
+    [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Reader.java)
+    через который он будет получать данные из файла (описание знакомства дальше),
+    - к тому же он получает ссылку на первого рабочего цепочки, чтобы оттдавать данные дальше.
 
 Картина должна получиться такая, только пока один `Pipeline` и нет разветвлений, остальные добавятся в 4й лабораторной.
 
@@ -43,6 +44,8 @@ this.dataAccessor = reader.getDataAccessor(chosenType);
 Такая косвенность поможет нам в 4й лабораторной, когда у одного `Reader` будут просить данные сразу несколько `Pipeline`ов.
     
 #### Работа конвейера
+
+У `PipelineManager` есть метод `run()`, который сейчас просто вызывает `pipeline.run()`.
 
 В `run()` у `Pipeline` находится цикл, который 
 1. Получает данные через `dataAccessor.get()`.
