@@ -21,9 +21,9 @@
 3. Создается экземпляр 
   [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java):
     - который при создании знакомится с 
-    [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Reader.java)
+    [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Reader.java),
     через который он будет получать данные из файла (описание этого знакомства дальше),
-    - к тому же он получает ссылку на первого рабочего цепочки, чтобы оттдавать ему данные.
+    - к тому же он получает ссылку на первого рабочего цепочки, чтобы отдавать ему данные.
     
 Пока картина такая
 ```
