@@ -10,7 +10,9 @@ public interface MyReader extends ru.spbstu.amd.javaed.pipeline.io.Reader {
 }
 ```
 
-### Интерфейсы
+Также важно помимо общих описаний лабораторных читать документацию в 
+[коде](https://github.com/winter-yuki/spbstu-amd-java/tree/master/src/main/java/ru/spbstu/amd/javaed/pipeline),
+чтобы точно понимать, какие ответственности делегируются сущностям, выделенным а архитектуре.
 
 Чтобы поспльзоваться интерфейсами, скачайте `jar` последней версии 
 [тут](https://drive.google.com/open?id=1nHOb1A9QFvt11BKg4bfI7ZFgErokAsG4) 
@@ -18,26 +20,24 @@ public interface MyReader extends ru.spbstu.amd.javaed.pipeline.io.Reader {
 [подключите](https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project) 
 его к проекту в идее.
 
-Особенно тщательно и в соответствии с документацией реализуйте интерфейс 
-[MutableWorker](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/MutableWorker.java).
-Для сдачи лабораторной необходимо, чтобы вы в свой конвейер могли встроить двух разных рабочих от двоих своих товарищей.
-Документация (комментарии в [коде](https://github.com/winter-yuki/spbstu-amd-java/tree/master/src/main/java/ru/spbstu/amd/javaed/pipeline) и тут) задает контракт, который нужно соблюдать, чтобы получить гарантии автора интерфейса, что ваши рабочие будут совместимы.
+### Интерфейсы
 
-Реализуйте интерфейсы
-[MutableWorker](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/MutableWorker.java)
-и
-[StandalonePipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/StandalonePipeline.java). 
-Получится конвейер, на который можно выставлять разные алгоритмы кодирования (одетые в рабочих).
+В этой лабораторной требуется реализовать:
+- [MutableWorker](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/MutableWorker.java)
+- [Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Writer.java)
+- [StandalonePipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/StandalonePipeline.java)
 
-Все интерфейсы можно расширять как вам угодно (хотя можно обойтись и без этого). Но 
-[MutableWorker](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/MutableWorker.java)
-Нужно имплементировать как есть.
+Также обратите внимание на содержимое пакета `ru.spbstu.amd.javaed.pipeline.worker`. Например, там объявлены полезные исключения.
+
+Далее уточним, что за сущности моделируют эти интерфейсы.
 
 ### Workers
 
-Чтобы разные алгоритмы кодирования работали вместе, нам нужно ввести для них некоторое обобщение. В нашем случае - это абстракций "Рабочий", "Worker" (далее, кратко `W`).
+Чтобы разные алгоритмы кодирования работали вместе, нам нужно ввести для них некоторое обобщение. В нашем случае - это абстракций "Рабочий", `Worker` (далее, кратко `W`).
 
-Рабочие - единицы конвейера обработки информации. Конвейер получается последовательным присоединением следующих рабочих к предыдущим (метод `setNext` у `MutableWorker`).
+Рабочие - единицы конвейера обработки информации. Конвейер получается последовательным присоединением следующих рабочих к предыдущим (метод `setNext` у `MutableWorker`). 
+
+Итого, последовательность рабочих - односвязный список. Во время работы конвейера каждый `W` отдает результат своей работы следующему рабочему в цепочке.
 
 Таким образом, имеем две стадии - сборка конвейера (знакомство рабочих) и его работа.
 
@@ -53,7 +53,7 @@ W1.setNext(W2);
 В `setNext(next)`:
 - Получаем типы, которые `W2` может обработать через метод ```next.getPossibleInputTypes()``` у
   [Worker](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/Worker.java).
-- Выбираем из множества тот тип, который `W1` может производить, запоминаем его. Далее, когда будем у `next` вызывать `work`, будем передавать данные сконвертированные в правильный тип.
+- Выбираем из множества тот тип, который `W1` может производить, запоминаем его.
 
 Если `W1` не умеет конвертировать данные в один из тех типов, которые `W2` может обрабатывать, из `setNext` вылетит исключение `NoCommonTypesException`, как написано в [документации](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/worker/MutableWorker.java) этого метода.
 
@@ -85,12 +85,13 @@ assert cls == String.class; // Это тоже правда
 - Тогда конвертация в коде ваглядит так:
     - ```new String(chars).getBytes("UTF-16BE")``` (char\[\] -> byte\[\])
     - ```new String(bytes, "UTF-16BE").toCharArray()``` (byte\[\] -> char\[\])
-    - к тому же можно полагаться что размер ```byte[]``` в этой кодировке
-    будет вдвое длиннее соттветствующего ```char[]```
+    - к тому же можно полагаться, что размер ```byte[]``` в этой кодировке будет вдвое длиннее соответствующего ```char[]```
 
 #### Работа
 
 Находимся в `worker.work()`.
+
+На параметр `Object producer` не обращаем внимание до 4й лабы.
 
 1. `Worker` получает данные `data` типа `Object` в метод `work`, далее ему нужно определить, какой тип из допустимых к нему пришел с помощью оператора `instanceof`.
 2. Далее он обрабатывает пришедшие данные.
@@ -101,10 +102,9 @@ assert cls == String.class; // Это тоже правда
 
 ### StandalonePipeline
 
-Таким образом, у нас есть рабочие, которые договариваются о типе и строятся в цепочку, по которой протекают данные.
+Таким образом, у нас есть рабочие, которые договариваются о типе и строятся в цепочку, по которой протекают данные во время работы.
 
-Теперь нам нужна сущность, которая будет их выстраивать в правильном порядке и выдавать затем данные, которые будут протекать по конвейеру,
-это будет [StandalonePipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/StandalonePipeline.java).
+Теперь нам нужна сущность, которая будет их выстраивать в правильном порядке и выдавать затем данные, которые будут протекать по конвейеру, это будет [StandalonePipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/StandalonePipeline.java).
 
 #### Построение конвейера
 
@@ -132,8 +132,7 @@ MyMutableWorker mmw = ru.spbstu.amd.javaed.pipeline.worker.MutableWorker.of(
 
 Можно было бы создавать рабочих и через конструктор, но код, в котором объекты создаются не напрямую, а через фабрики, поправу считается значительно более гибким.
 
-Заметим, что у последнего рабочего все еще нет следующего, это приведет к ошибке. В конец конвейера добавим еще рабочего, который будет писать данные в файл. Пусть этот рабочий имплементирует интерфейс  
-[Writer](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Writer.java).
+Заметим, что у последнего рабочего все еще нет следующего, это приведет к ошибке. В конец конвейера добавим еще рабочего, который будет писать данные в файл. Пусть этот рабочий имплементирует интерфейс `Writer`.
 
 ```
 StandalonePipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> MyWorkerThatWritesToFile
@@ -160,6 +159,8 @@ StandalonePipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> MyWorkerThatWrites
 
 
 ### Замечания
+
+Для сдачи лабораторной необходимо, чтобы вы в свой конвейер могли встроить двух разных рабочих от двоих своих товарищей. Документация (комментарии в коде к `MutableWorker` + описания лаб) задает контракт, который нужно соблюдать, чтобы получить гарантии автора интерфейса, что ваши рабочие будут совместимы.
 
 Заметьте, что методы `work` всех рабочих на конвейере вызываются последовательно. Таким образом, если исключение возникнет в одном из них, то оно может долететь до `run()` у `StandalonePipeline`, что очень удобно.
 
