@@ -2,10 +2,14 @@
 
 Один конвейер - один поток исполнения. Теперь мы хотим научиться запускать параллельно несколько потоков, чтобы архивировать файл быстрее на нескольких ядрах процессора. Будем к этому готовиться.
 
-Ранее у нас был автономный (standalone) конвейер `StandalonePipeline`. Теперь мы хотим в перспективе много конвейеров. Для этого введем еще одну абстракцию, 
-[PipelineManager](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/PipelineManager.java),
-который будет собирать конвейеры [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java) 
-(они не сами собираются) и запускать их в разных потоках. В этой  лабораторной пока `Pipeline` только один.
+### Интерфейсы
+
+Требуется реализовать:
+- [MutableReader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/MutableReader.java)
+- [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java) 
+- [PipelineManager](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/PipelineManager.java)
+
+Ранее у нас был автономный (standalone) конвейер `StandalonePipeline`. Теперь мы хотим в перспективе много конвейеров. Для этого реализуем чуть менее самостоятельный конвейер `Pipeline` и новую абстракцию `PipelineManager`, которая будет заниматься организацией `Pipeline`ов. В этой лабораторной экземпляр `Pipeline` только один.
 
 ### Сборка конвейера
 
@@ -18,16 +22,12 @@
   [Pipeline](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/Pipeline.java):
     - который при создании знакомится с 
     [Reader](https://github.com/winter-yuki/spbstu-amd-java/blob/master/src/main/java/ru/spbstu/amd/javaed/pipeline/io/Reader.java)
-    через который он будет получать данные из файла (описание знакомства дальше),
-    - к тому же он получает ссылку на первого рабочего цепочки, чтобы оттдавать данные дальше.
-
-Картина должна получиться такая, только пока один `Pipeline` и нет разветвлений, остальные добавятся в 4й лабораторной.
-
-[![spbspu-amd-java-lab3.png](https://i.postimg.cc/YSt7S4ff/spbspu-amd-java-lab3.png)](https://postimg.cc/ZWs275QC)
-
-Т.е. пока
+    через который он будет получать данные из файла (описание этого знакомства дальше),
+    - к тому же он получает ссылку на первого рабочего цепочки, чтобы оттдавать ему данные.
+    
+Пока картина такая
 ```
-Reader <- DataAccessor <- Pipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> Writer
+Reader <- ... <- Pipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> Writer
 ```
 
 #### Знакомство `Pipeline` и `Reader`
@@ -42,10 +42,23 @@ this.dataAccessor = reader.getDataAccessor(chosenType);
 ```
 
 Такая косвенность поможет нам в 4й лабораторной, когда у одного `Reader` будут просить данные сразу несколько `Pipeline`ов.
+
+Картина должна получиться такая, только пока один `Pipeline` и нет разветвлений, остальные добавятся в 4й лабораторной.
+
+[![spbspu-amd-java-lab3.png](https://i.postimg.cc/YSt7S4ff/spbspu-amd-java-lab3.png)](https://postimg.cc/ZWs275QC)
+
+```
+Reader <- DataAccessor <- Pipeline -> Worker1 -> Worker2 -> ... -> WorkerN -> Writer
+```
+
+
+Вынесение сущностей `Producer` и `MutableProducer` в отдельные интерфейсы не имеет практического смысла, но логически это абстракции более высокого порядка, чем `Reader`, поэтому они были вынесены отдельно. Нередко такой академический подход позволяет писать более гибкий и расширяемый код. Но в то же время 
+[не следует](https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B8%D1%82%D0%B2%D0%B0_%D0%9E%D0%BA%D0%BA%D0%B0%D0%BC%D0%B0)
+перебарщивать.
     
 #### Работа конвейера
 
-У `PipelineManager` есть метод `run()`, который сейчас просто вызывает `pipeline.run()`.
+У `PipelineManager` есть метод `run()`, который сейчас просто вызывает `lonelyPipeline.run()`.
 
 В `run()` у `Pipeline` находится цикл, который 
 1. Получает данные через `dataAccessor.get()`.
