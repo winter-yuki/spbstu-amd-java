@@ -43,7 +43,7 @@ this.dataAccessor = reader.getDataAccessor(chosenType);
 
 Такая косвенность поможет нам в 4й лабораторной, когда у одного `Reader` будут просить данные сразу несколько `Pipeline`ов.
 
-Картина должна получиться такая, только пока один `Pipeline` и нет разветвлений, остальные добавятся в 4й лабораторной.
+Картина должна получиться такая, только пока один `Pipeline` и нет разветвлений, остальные добавятся в 4й лабораторной:
 
 [![spbspu-amd-java-lab3.png](https://i.postimg.cc/YSt7S4ff/spbspu-amd-java-lab3.png)](https://postimg.cc/ZWs275QC)
 
