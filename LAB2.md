@@ -14,7 +14,7 @@ public interface MyReader extends ru.spbstu.amd.javaed.pipeline.io.Reader {
 [коде](https://github.com/winter-yuki/spbstu-amd-java/tree/master/src/main/java/ru/spbstu/amd/javaed/pipeline),
 чтобы точно понимать, какие ответственности делегируются сущностям, выделенным а архитектуре.
 
-Чтобы поспльзоваться интерфейсами, скачайте `jar` последней версии 
+Чтобы поспользоваться интерфейсами, скачайте `jar` последней версии 
 [тут](https://drive.google.com/open?id=1nHOb1A9QFvt11BKg4bfI7ZFgErokAsG4) 
 и 
 [подключите](https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project) 
