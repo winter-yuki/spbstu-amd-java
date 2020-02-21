@@ -26,4 +26,35 @@
 
 Желательно писать программы так, чтобы один и тот же код примерно работал и в случае ошибки, и в случае когда ее нет, тогда больше вероятность, что он будет нормально покрыт тестами.
 
+#### Оформление ошибок в java
+
+При написание модуля, например `MyParser` программы является хорошим тоном выкидывать исключения, являющиеся подклассом специального `MyParserException`, чтобы пользователь модуля (библиотеки) `MyParser` мог единообразно обрабатывать ошибки, в библиотеке происходящие. Это не относиться обычно к ошибкам программиста.
+
+Если `MyParser` пытается читать файл, может возникнуть `IOException` - проверяемое джавовское исключение, то его следует "завернуть" в исключение своего типа в теле публичного метода, например:
+```
+public class MyParserIOException extends MyParserException {
+  public MyParserIOException(Throwable exception) {
+    super(exception);
+  }
+  // .. other constructors
+}
+
+public class MyParser {
+  // ...
+  public void readFile(...) {
+    //...
+    try {
+      somePrivateMethodThatReadsFile(...);
+    } catch (IOException e) {
+      throw new MyParserIOException(e);
+    }
+    // ...
+  }
+  // ...
+}
+```
+
+
+
+
 
